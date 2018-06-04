@@ -1,6 +1,8 @@
 package e.wilso.cloudfirestore;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +26,7 @@ public class AddBookActivity extends AppCompatActivity {
    private DatePicker ed_date;
    private Button button;
    private String sbook, sname, sdate;
+   Intent intent;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +40,23 @@ public class AddBookActivity extends AppCompatActivity {
          public void onClick(View v) {
             // parse date into String
             parseString();
-            // add information into
-            addAction(sbook, sname, sdate);
+
+            if(sbook.isEmpty() || sname.isEmpty()) {
+               AlertDialog.Builder builder = new AlertDialog.Builder(AddBookActivity.this);
+               builder.setMessage("Item Cannot Be Empty")
+                       .setNegativeButton("Retry", null)
+                       .create()
+                       .show();
+            }
+
+            else {
+               // add information into Cloud Firebase
+               addAction(sbook, sname, sdate);
+               // 回傳result回上一個activity
+               AddBookActivity.this.setResult(RESULT_OK, intent);
+               // 關閉activity
+               AddBookActivity.this.finish();
+            }
          }
       });
    }
