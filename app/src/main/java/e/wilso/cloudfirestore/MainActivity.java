@@ -1,29 +1,17 @@
 package e.wilso.cloudfirestore;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
 
-   String[] item = {"新增書籍", "會員新增", "會員測試"};
+   String[] item = {"新增書籍", "會員新增", "複合查詢"};
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent1);
             break;
          case 2:
-            Intent intent2 = new Intent(MainActivity.this, AddMemberActivity.class);
+            Intent intent2 = new Intent(MainActivity.this, QueryActivity.class);
             startActivity(intent2);
             break;
          default:

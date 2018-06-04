@@ -1,10 +1,10 @@
 package e.wilso.cloudfirestore;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -94,7 +93,7 @@ public class AddBookActivity extends AppCompatActivity {
       db.collection("books").add(book).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
          @Override
          public void onComplete(@NonNull Task<DocumentReference> task) {
-            if(task.isSuccessful()) Log.d("onComplete", "Book Added");
+            if(task.isSuccessful()) Log.d("onComplete", "Book Added!");
             else Log.d("onComplete", "Error when adding book");
          }
       });

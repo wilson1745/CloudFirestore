@@ -1,25 +1,26 @@
 package e.wilso.cloudfirestore;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AddMemberActivity extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class AddMemberActivity extends AppCompatActivity {
       setContentView(R.layout.activity_add_member);
 
       //directAdd();
-      //addUsers();
+      addUsers();
       findView();
 
       btnadd.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +114,7 @@ public class AddMemberActivity extends AppCompatActivity {
 
    private void addUsers() {
       List<User> users = Arrays.asList(
+              new User("Wilson", "wilson155079@gmail.com", "28", "Male"),
               new User("Jane", "jane155079@gmail.com", "54", "Female"),
               new User("Alex", "alex155079@gmail.com", "23", "Male"),
               new User("Bob", "bob155079@gmail.com", "98", "Male")
@@ -121,5 +123,24 @@ public class AddMemberActivity extends AppCompatActivity {
       for(User user: users) {
          db.collection("users").add(user);
       }
+
+      CollectionReference userss = db.collection("users");
+      Query query = userss.limit(100);
+      query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+         @Override
+         public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            QuerySnapshot querySnapshot = task.isSuccessful() ? task.getResult() : null;
+
+            int n = 0;
+
+            // TODO: check if snapshot is null
+            for (DocumentSnapshot document : querySnapshot.getDocuments()) {
+               //User user = document.toObject(User.class);
+               User user = new User("Wilson", "wilson155079@gmail.com", "28", "Male");
+               n++;
+               Log.d("onComplete", "onCreate: user: " + user.getNickname() + " / " + n);
+            }
+         }
+      });
    }
 }
