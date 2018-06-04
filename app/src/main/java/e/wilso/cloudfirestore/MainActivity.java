@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-   String[] item = {"新增書籍", "會員資料"};
+   String[] item = {"新增書籍", "會員新增", "會員測試"};
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             break;
          case 1:
+            Intent intent1 = new Intent(MainActivity.this, AddMemberActivity.class);
+            startActivity(intent1);
+            break;
+         case 2:
+            Intent intent2 = new Intent(MainActivity.this, AddMemberActivity.class);
+            startActivity(intent2);
             break;
          default:
             break;

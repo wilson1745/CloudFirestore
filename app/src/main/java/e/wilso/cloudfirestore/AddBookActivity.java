@@ -87,7 +87,6 @@ public class AddBookActivity extends AppCompatActivity {
       FirebaseFirestore db = FirebaseFirestore.getInstance();
       Map<String, Object> book = new HashMap<String, Object>();
 
-      Log.d("addAction", "sbook: " + sbook + " sname: " + sname + " sdate: " + sdate);
       book.put("title", sbook);
       book.put("author", sname);
       book.put("release", sdate);
